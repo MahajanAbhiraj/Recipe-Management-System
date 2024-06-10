@@ -1,0 +1,48 @@
+.users-page {
+    padding: 20px;
+  }
+  
+  .users-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .user-item {
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 10px;
+  }
+  
+  .user-item div {
+    margin-bottom: 5px;
+  }
+  
+  .user-actions {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .btn {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .view-btn {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .edit-btn {
+    background-color: #28a745;
+    color: white;
+  }
+  
+  .view-btn:hover,
+  .edit-btn:hover {
+    opacity: 0.8;
+  }
+  

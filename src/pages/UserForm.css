@@ -1,0 +1,73 @@
+.user-form-container {
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  
+  .user-form h3 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+  }
+  
+  .user-form .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .user-form .form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+  }
+  
+  .user-form .form-group input,
+  .user-form .form-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    box-sizing: border-box;
+  }
+  
+  .user-form .form-group input:focus,
+  .user-form .form-group select:focus {
+    border-color: #007bff;
+    outline: none;
+  }
+  
+  .user-form .form-actions {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .user-form .btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .user-form .btn.green {
+    background-color: #28a745;
+    color: #fff;
+  }
+  
+  .user-form .btn.green:hover {
+    background-color: #218838;
+  }
+  
+  .user-form .btn.red {
+    background-color: #dc3545;
+    color: #fff;
+  }
+  
+  .user-form .btn.red:hover {
+    background-color: #c82333;
+  }
+  

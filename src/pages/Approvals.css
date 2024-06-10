@@ -1,0 +1,72 @@
+/* Approvals.css */
+
+.approvals-container {
+    margin: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .approvals-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .approvals-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .approvals-item {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #f9f9f9;
+  }
+  
+  .approvals-recipe-name {
+    font-weight: bold;
+  }
+
+  .ingredient-heading{
+        font-weight: bold;
+      
+  }
+  
+  .approvals-final-weight {
+    margin-top: 5px;
+  }
+  
+  .approvals-ingredients {
+    margin-top: 10px;
+  }
+  
+  .approvals-ingredients ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .approvals-ingredient {
+    margin-bottom: 5px;
+    
+  }
+  
+  .approvals-approve-button {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    padding: 5px 10px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  .approvals-approve-button:hover {
+    background-color: #45a049;
+  }
+  
+  .no-approvals {
+    font-size: 18px;
+    color: #777;
+  }
+  

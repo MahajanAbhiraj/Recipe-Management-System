@@ -1,0 +1,119 @@
+.recipe-form-container {
+    padding: 17px;
+    border: 1px solid #ddd;
+    border-radius: 2px;
+    margin-top: 15px;
+  }
+  
+  .recipe-form-container label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .recipe-form-container input,
+  .recipe-form-container textarea,
+  .recipe-form-container select {
+    width: 90%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .ingredient-selection {
+    position: relative;
+    margin-bottom: 10px;
+  }
+ 
+  .confirmation-popup,
+.insufficient-popup {
+  position: fixed; /* Position as fixed to appear as popup */
+  top: 50%; /* Center vertically */
+  left: 50%; /* Center horizontally */
+  transform: translate(-50%, -50%); /* Center the popup */
+  background-color: white;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  z-index: 9999; /* Ensure it appears on top */
+}
+
+.confirmation-popup button,
+.insufficient-popup button {
+  margin-top: 20px; /* Increase top margin for spacing */
+  margin-right: 10px; /* Add right margin for spacing */
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: green;
+  color: white;
+}
+  
+  .ingredient-selection input[type="text"] {
+    width: calc(100% - 110px);
+    margin-right: 10px;
+  }
+  
+  .ingredient-dropdown {
+    position: absolute;
+    top: 40px;
+    left: 0;
+    width: calc(100% - 110px);
+    max-height: 150px;
+    overflow-y: auto;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    z-index: 10;
+  }
+  
+  .ingredient-dropdown li {
+    padding: 10px;
+    cursor: pointer;
+  }
+  
+  .ingredient-dropdown li:hover {
+    background: #f0f0f0;
+  }
+  
+  .ingredient-selection input[type="text"] + input {
+    width: 100px;
+  }
+  
+  .ingredient-selection button {
+    margin-left: 10px;
+    padding: 8px 12px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .recipe-ingredients ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .recipe-ingredients li {
+    padding: 5px 0;
+  }
+  .proceed-btn {
+    background-color: #4caf50; /* Green */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .proceed-btn:hover {
+    background-color: #45a049; /* Darker green */
+  }
+  
+  

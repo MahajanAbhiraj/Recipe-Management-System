@@ -1,0 +1,133 @@
+/* Manager.css */
+
+.manager-page {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.compartment {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.compartment h3 {
+  margin-top: 0;
+  font-size: 1.5em;
+  color: #4B3E75; /* Dark purple color */
+}
+
+.compartment p {
+  margin: 10px 0;
+  font-size: 1em;
+  color: #333;
+}
+
+.btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 25px;
+  font-size: 1em;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: background 0.3s, transform 0.3s;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.btn.blue {
+  background: linear-gradient(145deg, #6C5CE7, #A29BFE); /* Gradient background */
+  color: white;
+}
+
+.btn.green {
+  background: linear-gradient(145deg, #19722d, #336044); /* Gradient green */
+  color: white;
+}
+
+.btn.yellow {
+  background: linear-gradient(145deg, #ffc107, #ffca2c); /* Gradient yellow */
+  color: black;
+}
+
+.btn.purple {
+  background: linear-gradient(145deg, #7c5b89, #663d72); /* Gradient purple */
+  color: white;
+}
+
+.btn.red {
+  background: linear-gradient(145deg, #712f28, #763131); /* Gradient red */
+  color: white;
+}
+
+.btn:hover {
+  transform: translateY(-2px); /* Slightly lift the button on hover */
+}
+
+.link {
+  color: #6C5CE7;
+  text-decoration: none;
+  font-size: 1em;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+.upload-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.file-upload {
+  display: none;
+}
+
+.upload-button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 25px;
+  font-size: 1em;
+  cursor: pointer;
+  background: linear-gradient(145deg, #2d704a, #265431); /* Gradient background */
+  color: white;
+  text-transform: uppercase;
+  transition: background 0.3s, transform 0.3s;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.upload-button:hover {
+  transform: translateY(-2px); /* Slightly lift the button on hover */
+}
+
+.create-recipe-button {
+  background: linear-gradient(145deg, #28a745, #43d17a); /* Gradient green */
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 25px;
+  font-size: 1em;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: background 0.3s, transform 0.3s;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.create-recipe-button:hover {
+  transform: translateY(-2px); /* Slightly lift the button on hover */
+}
+
+.pending-approvals-button {
+  color: #6C5CE7;
+  text-decoration: none;
+  font-size: 1em;
+}
+
+.pending-approvals-button:hover {
+  text-decoration: underline;
+}
