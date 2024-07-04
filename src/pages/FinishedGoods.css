@@ -1,0 +1,73 @@
+/* Style for tables */
+.fgs-table-container {
+    margin-top: 30px;
+  }
+  
+  .fgs-table-container table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+  
+  .fgs-table-container th, .fgs-table-container td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  .fgs-table-container th {
+    background-color: #f2f2f2;
+    color: #333;
+  }
+  
+  .fgs-table-container tbody tr:hover {
+    background-color: #f5f5f5;
+  }
+  
+  /* Style for modals */
+  .fgs-modal-header {
+    background-color: #007bff;
+    color: #fff;
+    border-bottom: none;
+  }
+  
+  .fgs-modal-title {
+    color: #fff;
+  }
+  
+  .fgs-modal-body table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .fgs-modal-body th, .fgs-modal-body td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  .fgs-modal-body th {
+    background-color: #f2f2f2;
+    color: #333;
+  }
+  
+  .fgs-modal-body tbody tr:hover {
+    background-color: #f5f5f5;
+  }
+  
+  .fgs-modal-footer {
+    border-top: none;
+  }
+
+  /* Override Bootstrap modal styles for centering */
+.modal-dialog {
+    display: flex;
+    align-items: center;
+    min-height: calc(100% - 3rem); /* Adjust as needed */
+  }
+  
+  .modal-content {
+    margin: auto;
+  }
+  
+  

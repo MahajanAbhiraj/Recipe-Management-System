@@ -53,6 +53,7 @@ const Approvals = () => {
         <ul className="approvals-list">
           {pendingApprovals.map(item => (
             <li className="approvals-item" key={item._id}>
+              <div className="approvals-batchCode">Batch Code: {item.batchCode}</div>
               <div className="approvals-recipe-name">Recipe Name: {item.recipeName}</div>
               <div className="approvals-final-weight">Final Weight: {item.finalWeight} kg</div>
               <div className="approvals-ingredients">

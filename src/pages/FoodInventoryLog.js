@@ -183,6 +183,7 @@ const FoodInventoryLog = () => {
         <thead>
           <tr>
             <th>S.No</th>
+            <th>Batch Code</th>
             <th>Recipe Name</th>
             <th>Final Weight</th>
             <th>Actions</th>
@@ -192,8 +193,9 @@ const FoodInventoryLog = () => {
           {finals.map((final,index) => (
             <tr key={final._id}>
                 <td>{index+1}</td>
+              <td>{final.batchCode}</td>
               <td>{final.recipeName}</td>
-              <td>{final.finalWeight}</td>
+              <td>{final.finalWeight} Kg</td>
               <td>
                 <button className="food-inventory-button" onClick={() => handleViewDetails(final)}>View Details</button>
                 <button className="food-inventory-button" onClick={() => generateExcel(final)}>Generate Excel</button>

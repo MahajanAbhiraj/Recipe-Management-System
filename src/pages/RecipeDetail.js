@@ -12,6 +12,9 @@ const RecipeDetail = ({ recipe }) => {
   const [requiredWeight, setRequiredWeight] = useState('');
   const [insufficientIngredients, setInsufficientIngredients] = useState([]);
   const [showConfirmation, setShowConfirmation] = useState(false);
+  const [batchCode, setBatchCode] = useState(''); // State for batch code
+  const [updatedIngredients, setUpdatedIngredients] = useState([]);
+  const [shouldGeneratePDF, setShouldGeneratePDF] = useState(false);
 
   useEffect(() => {
     const fetchRecipeDetails = async () => {
@@ -78,17 +81,18 @@ const RecipeDetail = ({ recipe }) => {
       setShowConfirmation(true);
     }
   };
+
   const generatePDF = () => {
     const doc = new jsPDF();
-
+  
     doc.setFont('helvetica', 'bold');
     doc.text('Preparation Notes', 20, 20);
     doc.setFont('helvetica', 'normal');
-    
+  
     const pageHeight = doc.internal.pageSize.height; // Get the height of the page
     const margin = 20;
     const maxHeight = pageHeight - margin * 2;
-    
+  
     // Split the text into lines that fit within the page width
     const notes = doc.splitTextToSize(recipeDetails.preparationNotes, 170);
     let cursorY = 30;
@@ -100,30 +104,32 @@ const RecipeDetail = ({ recipe }) => {
       doc.text(line, 20, cursorY);
       cursorY += 10;
     });
-    
+  
     // Add some space before the table
     cursorY += 10;
-    
+  
     // Check if there's enough space for the table, otherwise add a new page
     if (cursorY + 20 > maxHeight) {
       doc.addPage();
       cursorY = margin;
     }
-    
+    console.log("HI");
+    console.log(updatedIngredients);
     // Use autoTable to create the table, which handles page breaks automatically
     doc.autoTable({
       startY: cursorY,
-      head: [['Food Item', 'Quantity']],
-      body: recipeDetails.ingredients.map((ingredient) => [
+      head: [['Food Item', 'Required Quantity', 'Available Quantity']],
+      body: updatedIngredients.map((ingredient) => [
         ingredient.ingredient,
-        (ingredient.quantity * (requiredWeight / recipeDetails.totalWeight)).toFixed(2),
+        ingredient.requiredQuantity,
+        ingredient.availableQuantity,
       ]),
       margin: { top: cursorY },
     });
-    doc.save('Recipe.pdf');
+    const fileName = `${recipeDetails.name}_${batchCode}_Recipe.pdf`;
+     doc.save(fileName);
   };
-
-
+  
 
   const saveOnFinal = async () => {
     const ingredientsUsed = recipeDetails.ingredients.map((ingredient) => ({
@@ -135,7 +141,8 @@ const RecipeDetail = ({ recipe }) => {
       recipeName: recipeDetails.name,
       finalWeight: requiredWeight,
       ingredientsUsed: ingredientsUsed,
-      approved: false, // Set default value for approved
+      batchCode: batchCode, 
+      approved: false, 
     };
 
     try {
@@ -157,12 +164,12 @@ const RecipeDetail = ({ recipe }) => {
     }
   };
 
-
   const deductQuantity = async () => {
     try {
+      const updatedIngredientsList = [];
       for (const ingredient of recipeDetails.ingredients) {
         const { ingredient: ingredientName, quantity } = ingredient;
-        const requiredQuantity = quantity * (requiredWeight / recipeDetails.totalWeight); // Calculate required quantity based on requiredWeight
+        const requiredQuantity = quantity * (requiredWeight / recipeDetails.totalWeight);
   
         // Fetch the current quantity of the ingredient
         const response = await axios.get(`${BACKEND_URL}/ingredients/${ingredientName}`);
@@ -176,24 +183,50 @@ const RecipeDetail = ({ recipe }) => {
         // Update the ingredient quantity
         await axios.patch(`${BACKEND_URL}/ingredients/${ingredientName}`, { quantity: editedQuantity });
   
+        // Store the updated ingredient quantity
+        updatedIngredientsList.push({
+          ingredient: ingredientName,
+          requiredQuantity: requiredQuantity.toFixed(2),
+          availableQuantity: editedQuantity.toFixed(2)
+        });
         console.log(`Deducted ${requiredQuantity} units of ${ingredientName} from total quantity.`);
       }
+      setUpdatedIngredients(updatedIngredientsList);
     } catch (error) {
       console.error('Error deducting quantity:', error);
     }
   };
-  
 
-  const handleConfirm = () => {
+   
+  useEffect(() => {
+    if (shouldGeneratePDF && updatedIngredients.length > 0) {
+      generatePDF();
+      setShouldGeneratePDF(false); // Reset the flag
+    }
+  }, [shouldGeneratePDF, updatedIngredients]);
+  
+  const handleConfirm = async () => {
     console.log('Confirmed preparation of', requiredWeight, 'kg of recipe');
-    generatePDF();
+    
+    // Ensure updated ingredients are set before generating PDF
+    await deductQuantity();
+    
+    // Set the flag to generate the PDF
+    setShouldGeneratePDF(true);
+    
+    // Save the final product
     saveOnFinal();
-    deductQuantity();
+  
     setShowConfirmation(false);
   };
+  
 
   const handleCloseInsufficientPopup = () => {
     setInsufficientIngredients([]);
+  };
+
+  const handleBatchCodeChange = (e) => {
+    setBatchCode(e.target.value);
   };
 
   if (!recipeDetails) {
@@ -272,6 +305,13 @@ const RecipeDetail = ({ recipe }) => {
         <div className="confirmation-popup">
           <h3>Confirmation</h3>
           <p>Are you sure you want to prepare {requiredWeight} kg of this recipe?</p>
+          <label htmlFor="batchCode">Enter Batch Code:</label>
+          <input
+            type="text"
+            id="batchCode"
+            value={batchCode}
+            onChange={handleBatchCodeChange}
+          />
           <button onClick={handleConfirm}>Yes</button>
           <button onClick={() => setShowConfirmation(false)}>No</button>
         </div>
@@ -290,7 +330,7 @@ const RecipeDetail = ({ recipe }) => {
             {recipeDetails.ingredients.map((ingredient, index) => (
               <tr key={index}>
                 <td>{ingredient.ingredient}</td>
-                <td>{ingredient.quantity}</td>
+                <td>{ingredient.quantity} gms</td>
               </tr>
             ))}
           </tbody>

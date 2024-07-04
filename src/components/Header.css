@@ -1,0 +1,28 @@
+.header {
+    width: 100%;
+    height: 60px;
+    background-color: #333;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5em;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+.iconbites {
+    width: 50px; /* Adjust the size of the icon */
+    height: auto;
+    margin-right: 10px; /* Adds space between icon and text */
+    margin-left: 30px;
+}
+
+.header-text {
+    font-size: 1.5rem; /* Adjust the font size as needed */
+    font-weight: bold;
+    text-align: center; /* Center the text */
+    flex-grow: 1; /* Allow text to take remaining space */
+}

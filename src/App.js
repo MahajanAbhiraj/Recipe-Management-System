@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
+import Header from './components/Header';
 import Home from './pages/Home';
 import Login from './pages/LoginPage';
 import RecipeList from './pages/RecipeList';
@@ -8,9 +9,11 @@ import RecipeDetail from './pages/RecipeDetail';
 import Manager from './pages/Manager';
 import Approvalpage from './pages/Approvals';
 import FoodInventoryLog from './pages/FoodInventoryLog';
+import FinishedGoods from './pages/FinishedGoods';
 import Ingredients from './pages/Ingredients';
 import Users from './pages/Users';
 import { BACKEND_URL } from './constants';
+import './App.css';
 
 function App() {
     const [loggedInUser, setLoggedInUser] = useState(localStorage.getItem('username'));
@@ -67,8 +70,6 @@ function AppContent({ loggedInUser, onLogin, onLogout }) {
                         const data = await response.json();
                         setUserData(data);
                         setLoading(false);
-                        // console.log('Fetched User Data:',data)
-                        // console.log('UserData:', userData); // Log the fetched user data
                     } else {
                         console.error('Failed to fetch user data');
                     }
@@ -82,15 +83,18 @@ function AppContent({ loggedInUser, onLogin, onLogout }) {
     }, [loggedInUser]);
     
 
-    return (
-        <div className="App">
-            {location.pathname !== '/login' && (
-                <Navbar
-                    onPageChange={handlePageChange}
-                    loggedInUser={loggedInUser}
-                    onLogout={onLogout}
-                />
-            )}
+    // Inside AppContent component
+return (
+    <div className="App">
+        <Header/>
+        {location.pathname !== '/login' && (
+            <Navbar
+                onPageChange={handlePageChange}
+                loggedInUser={loggedInUser}
+                onLogout={onLogout}
+            />
+        )}
+        <div className="main-content">
             <Routes>
                 <Route path="/login" element={<Login onLogin={onLogin} />} />
             </Routes>
@@ -106,11 +110,15 @@ function AppContent({ loggedInUser, onLogin, onLogout }) {
                     <Route path="/recipes/:id" element={<RecipeDetail />} />
                     <Route path="/approvals" element={<Approvalpage />} />
                     <Route path="/foodinventorylog" element={<FoodInventoryLog />} />
+                    <Route path="/finishedgoods" element={<FinishedGoods />} />
+
                     <Route path="/users" element={<Users />} />
                 </Routes>
             )}
-        </div>
-    );
+          </div>
+    </div>
+);
+
 }
 
 export default App;
