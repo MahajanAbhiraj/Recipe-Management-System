@@ -5,6 +5,7 @@ import { BACKEND_URL } from '../constants';
 
 const RecipeList = ({ onSelectRecipe }) => {
   const [recipes, setRecipes] = useState([]);
+  const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
     // Fetch recipes from the backend
@@ -21,19 +22,37 @@ const RecipeList = ({ onSelectRecipe }) => {
     fetchRecipes();
   }, []);
 
+  const handleSearchChange = (event) => {
+    setSearchQuery(event.target.value);
+  };
+
+  const filteredRecipes = recipes.filter((recipe) =>
+    recipe.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   return (
     <div className="recipe-list-container">
-      <h2>Recipes</h2>
-      {recipes.map((recipe) => (
-        <div key={recipe._id} className="recipe-item">
-          <h3>
-            <Link to={`/recipes/${recipe._id}`} onClick={() => onSelectRecipe(recipe)}>
-              {recipe.name}
-            </Link>
-          </h3>
-          <p>{recipe.description}</p>
-        </div>
-      ))}
+      <h2 className="recipe-list-title">Recipes</h2>
+      <div className="search-bar">
+        <input
+          type="text"
+          placeholder="Search recipes..."
+          value={searchQuery}
+          onChange={handleSearchChange}
+        />
+      </div>
+      <div className="recipe-list">
+        {filteredRecipes.map((recipe) => (
+          <div key={recipe._id} className="recipe-card">
+            <h3 className="recipe-card-title">
+              <Link to={`/recipes/${recipe._id}`} onClick={() => onSelectRecipe(recipe)}>
+                {recipe.name}
+              </Link>
+            </h3>
+            <p className="recipe-card-description">{recipe.description}</p>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

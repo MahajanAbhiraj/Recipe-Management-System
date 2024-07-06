@@ -49,6 +49,23 @@
   color: white;
 }
 
+
+  .no-underline {
+    text-decoration: none;
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    text-align: center;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 12px;
+  }
+  
+
+
 .btn.yellow {
   background: linear-gradient(145deg, #ffc107, #ffca2c); /* Gradient yellow */
   color: black;

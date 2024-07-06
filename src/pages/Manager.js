@@ -28,6 +28,7 @@ const UploadButton = ({ handleFileUpload }) => {
 const Manager = ({ user }) => {
   const [showRecipeForm, setShowRecipeForm] = useState(false);
   const [showUserForm, setShowUserForm] = useState(false);
+  const [showPackagingForm, setShowPackagingForm] = useState(false);
   const [ingredients, setIngredients] = useState([]);
   const[IsEditing,setIsEditing]=useState(false);
   const navigate = useNavigate();
@@ -129,6 +130,7 @@ const Manager = ({ user }) => {
     // Add logic to handle creating the recipe
   };
 
+
   const handleCreateUser = (userData) => {
     setShowUserForm(false);
     alert('User Created');
@@ -163,6 +165,18 @@ const Manager = ({ user }) => {
         </button>
       </div>
 
+      
+    <div className="compartment">
+      <h3>Create Packaging Item</h3>
+      <p>To create a new packaging item, use the link below.</p>
+      <Link to="/createpackaging" className="btn green no-underline">
+        Create Packaging Item
+      </Link>
+    </div>
+  
+
+      
+
       <div className="compartment">
         <h3>Pending Approvals</h3>
         <p>To approve pending final products, use the link below.</p>
@@ -187,6 +201,10 @@ const Manager = ({ user }) => {
       <Modal isOpen={showRecipeForm} onClose={() => setShowRecipeForm(false)}>
         <RecipeForm ingredients={ingredients} handleCreateRecipe={handleCreateRecipe} />
       </Modal>
+
+      
+
+
 
       <Modal isOpen={showUserForm} onClose={() => setShowUserForm(false)}>
         <UserForm handleCreateUser={handleCreateUser} onClose={() => setShowUserForm(false)} />

@@ -11,7 +11,8 @@ const Navbar = ({ onPageChange, loggedInUser, onLogout }) => {
                 <button onClick={() => onPageChange('ingredients')}>Ingredients</button>
                 <button onClick={() => onPageChange('foodinventorylog')}>Final Product</button>
                 <button onClick={() => onPageChange('finishedgoods')}>Finished Goods</button>
-                <button onClick={() => onPageChange('packaged')}>Packed Item</button>
+                <button onClick={() => onPageChange('packaged')}>Packing Items</button>
+                <button onClick={() => onPageChange('packagedlogs')}>Packed Goods</button>
                 <button onClick={() => onPageChange('manager')}>Manager</button>
                 {loggedInUser ? (
                     <>

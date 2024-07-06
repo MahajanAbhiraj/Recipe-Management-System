@@ -26,7 +26,7 @@ const Approvals = () => {
 
   const handleApprove = async (id) => {
     try {
-      const response = await fetch(`http://localhost:5000/finals/${id}`, {
+      const response = await fetch(`${BACKEND_URL}/finals/${id}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
@@ -36,6 +36,15 @@ const Approvals = () => {
 
       if (response.ok) {
         console.log(`Approval for ID ${id} successful`);
+
+        // Find the approved item
+        const approvedItem = pendingApprovals.find(item => item._id === id);
+
+        // Call the function to update final goods
+        if (approvedItem) {
+          await handleUpdateFinalGoods(approvedItem.recipeName, approvedItem.finalWeight);
+        }
+
         // Remove the approved item from pending approvals list
         setPendingApprovals(pendingApprovals.filter(item => item._id !== id));
       } else {
@@ -43,6 +52,26 @@ const Approvals = () => {
       }
     } catch (error) {
       console.error(`Error approving item with ID ${id}:`, error);
+    }
+  };
+
+  const handleUpdateFinalGoods = async (recipeName, TotalWeight) => {
+    try {
+      const response = await fetch(`${BACKEND_URL}/fgs`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ recipeName, TotalWeight }),
+      });
+
+      if (response.ok) {
+        console.log(`Final goods updated successfully for recipe ${recipeName}`);
+      } else {
+        console.error(`Failed to update final goods for recipe ${recipeName}`);
+      }
+    } catch (error) {
+      console.error(`Error updating final goods for recipe ${recipeName}:`, error);
     }
   };
 

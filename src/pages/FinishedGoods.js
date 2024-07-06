@@ -8,6 +8,7 @@ const FgsDetails = () => {
   const [fgsList, setFgsList] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [selectedFgs, setSelectedFgs] = useState(null);
+  const [scaledIngredients, setScaledIngredients] = useState([]);
 
   useEffect(() => {
     const fetchFgsDetails = async () => {
@@ -22,9 +23,26 @@ const FgsDetails = () => {
     fetchFgsDetails();
   }, []);
 
-  const handleShowDetails = (fgs) => {
-    setSelectedFgs(fgs);
-    setShowModal(true);
+  const handleShowDetails = async (fgs) => {
+    try {
+      const response = await axios.get(`${BACKEND_URL}/recipes/name/${fgs.recipeName}`);
+      const recipe = response.data;
+
+      // Calculate the scaling factor
+      const scalingFactor = fgs.TotalWeight / recipe.totalWeight;
+
+      // Scale the ingredients
+      const scaledIngredients = recipe.ingredients.map(ingredient => ({
+        ingredientName: ingredient.ingredient,
+        quantity: ingredient.quantity * scalingFactor,
+      }));
+
+      setSelectedFgs(fgs);
+      setScaledIngredients(scaledIngredients);
+      setShowModal(true);
+    } catch (error) {
+      console.error('Error fetching recipe details:', error);
+    }
   };
 
   const handleClose = () => setShowModal(false);
@@ -73,10 +91,10 @@ const FgsDetails = () => {
                 </tr>
               </thead>
               <tbody>
-                {selectedFgs.ingredientsUsed.map((ingredient, index) => (
+                {scaledIngredients.map((ingredient, index) => (
                   <tr key={index}>
                     <td>{ingredient.ingredientName}</td>
-                    <td>{ingredient.quantity}</td>
+                    <td>{ingredient.quantity.toFixed(2)}</td> {/* Round to 2 decimal places */}
                   </tr>
                 ))}
               </tbody>

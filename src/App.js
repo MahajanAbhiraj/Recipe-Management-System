@@ -12,6 +12,11 @@ import FoodInventoryLog from './pages/FoodInventoryLog';
 import FinishedGoods from './pages/FinishedGoods';
 import Ingredients from './pages/Ingredients';
 import Users from './pages/Users';
+import PackagingForm from './pages/PackagingForm'; // Import PackagingForm component
+import PackagingList from './pages/PackagingList';
+import PackagedDetails from './pages/PackagedDetails';
+
+
 import { BACKEND_URL } from './constants';
 import './App.css';
 
@@ -111,8 +116,12 @@ return (
                     <Route path="/approvals" element={<Approvalpage />} />
                     <Route path="/foodinventorylog" element={<FoodInventoryLog />} />
                     <Route path="/finishedgoods" element={<FinishedGoods />} />
-
+                    <Route path="/packaged" element={<PackagingList />} />
+                    <Route path="/packaged/:id" element={<PackagedDetails />} />
+                    <Route path="/createpackaging" element={<PackagingForm />} />
                     <Route path="/users" element={<Users />} />
+                    
+                    
                 </Routes>
             )}
           </div>
