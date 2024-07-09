@@ -16,7 +16,6 @@ import PackagingForm from './pages/PackagingForm'; // Import PackagingForm compo
 import PackagingList from './pages/PackagingList';
 import PackagedDetails from './pages/PackagedDetails';
 
-
 import { BACKEND_URL } from './constants';
 import './App.css';
 
@@ -120,8 +119,6 @@ return (
                     <Route path="/packaged/:id" element={<PackagedDetails />} />
                     <Route path="/createpackaging" element={<PackagingForm />} />
                     <Route path="/users" element={<Users />} />
-                    
-                    
                 </Routes>
             )}
           </div>
