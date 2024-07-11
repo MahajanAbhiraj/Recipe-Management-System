@@ -178,9 +178,15 @@ const Manager = ({ user }) => {
       
 
       <div className="compartment">
-        <h3>Pending Approvals</h3>
+        <h3>Pending Recipe Order Approvals</h3>
+        <p>To approve pending products, use the link below.</p>
+        <Link to="/foodlogapprovals" className="link pending-approvals-button">Pending Approvals</Link>
+      </div>
+
+      <div className="compartment">
+        <h3>Pending Package Approvals</h3>
         <p>To approve pending final products, use the link below.</p>
-        <Link to="/approvals" className="link pending-approvals-button">Pending Approvals</Link>
+        <Link to="/packagelogapprovals" className="link pending-approvals-button">Pending Approvals</Link>
       </div>
 
       <div className="compartment">

@@ -11,6 +11,7 @@ const PackagedDetails = () => {
   const [insufficientMaterials, setInsufficientMaterials] = useState([]);
   const [showPopup, setShowPopup] = useState(false);
   const [showConfirmation, setShowConfirmation] = useState(false);
+  const [batchCode, setBatchCode] = useState(''); // State to handle batch code
 
   useEffect(() => {
     const fetchPackagedItem = async () => {
@@ -27,6 +28,10 @@ const PackagedDetails = () => {
 
   const handleAmountChange = (event) => {
     setAmountInKgs(event.target.value);
+  };
+
+  const handleBatchCodeChange = (event) => {
+    setBatchCode(event.target.value);
   };
 
   const handleCreateClick = async () => {
@@ -63,21 +68,32 @@ const PackagedDetails = () => {
   const handleConfirmClick = async (confirmed) => {
     setShowConfirmation(false);
     if (confirmed) {
-      for (let { recipe, requiredQuantity } of packagedItem.products.map((product) => ({
-        recipe: product.recipe,
-        requiredQuantity: (product.quantity * amountInKgs) / packagedItem.weight,
-      }))) {
-        try {
-          await axios.put(`${BACKEND_URL}/fgs`, {
-            recipeName:recipe,
-            TotalWeight: -requiredQuantity, // Deduct the required quantity
-          });
-          
-        } catch (error) {
-          console.error(`Error updating recipe ${recipe}:`, error);
+      try {
+        for (let { recipe, requiredQuantity } of packagedItem.products.map((product) => ({
+          recipe: product.recipe,
+          requiredQuantity: (product.quantity * amountInKgs) / packagedItem.weight,
+        }))) {
+          try {
+            await axios.put(`${BACKEND_URL}/fgs`, {
+              recipeName: recipe,
+              TotalWeight: -requiredQuantity, // Deduct the required quantity
+            });
+          } catch (error) {
+            console.error(`Error updating recipe ${recipe}:`, error);
+          }
         }
+  
+        // Post to /packagelag with package name, weight, and batch code
+        await axios.post(`${BACKEND_URL}/packagelogs`, {
+          Name: packagedItem.name,
+          Weight: packagedItem.weight,
+          batchcode: batchCode // Include batch code in the post request
+        });
+  
+        alert('Quantities successfully updated and package information posted!');
+      } catch (error) {
+        console.error('Error during the update process:', error);
       }
-      alert('Quantities successfully updated!');
     }
   };
 
@@ -125,6 +141,16 @@ const PackagedDetails = () => {
             <div className="packaged-confirmation">
               <div className="packaged-confirmation-content">
                 <p>Are you sure you want to create this package?</p>
+                <div className="batch-code-input">
+                  <label htmlFor="batchCode">Enter Batch Code:</label>
+                  <input
+                    type="text"
+                    id="batchCode"
+                    value={batchCode}
+                    onChange={handleBatchCodeChange}
+                    placeholder="Enter batch code"
+                  />
+                </div>
                 <button onClick={() => handleConfirmClick(true)}>Yes</button>
                 <button onClick={() => handleConfirmClick(false)}>No</button>
               </div>

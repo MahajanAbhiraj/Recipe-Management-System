@@ -1,0 +1,48 @@
+.package-logs-container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .package-logs-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #343a40;
+  }
+  
+  .package-logs-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .package-logs-table th, .package-logs-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #dee2e6;
+  }
+  
+  .package-logs-table th {
+    background-color: #343a40;
+    color: #fff;
+  }
+  
+  .package-logs-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  .package-logs-table tr:hover {
+    background-color: #e9ecef;
+  }
+  
+  .package-logs-table th:first-child, .package-logs-table td:first-child {
+    width: 5%;
+    text-align: center;
+  }
+  
+  .package-logs-table th:last-child, .package-logs-table td:last-child {
+    width: 10%;
+  }
+  

@@ -7,13 +7,15 @@ import Login from './pages/LoginPage';
 import RecipeList from './pages/RecipeList';
 import RecipeDetail from './pages/RecipeDetail';
 import Manager from './pages/Manager';
-import Approvalpage from './pages/Approvals';
+import Approvalpage from './pages/FoodApprovals';
 import FoodInventoryLog from './pages/FoodInventoryLog';
 import FinishedGoods from './pages/FinishedGoods';
 import Ingredients from './pages/Ingredients';
 import Users from './pages/Users';
 import PackagingForm from './pages/PackagingForm'; // Import PackagingForm component
 import PackagingList from './pages/PackagingList';
+import PackagedLogs from './pages/PackagedLogs';
+import PackageLogApproval from './pages/PackageLogApproval';
 import PackagedDetails from './pages/PackagedDetails';
 
 import { BACKEND_URL } from './constants';
@@ -112,11 +114,13 @@ return (
                     <Route path="/manager" element={<Manager user={userData} />} />
                     <Route path="/recipes" element={<RecipeList />} />
                     <Route path="/recipes/:id" element={<RecipeDetail />} />
-                    <Route path="/approvals" element={<Approvalpage />} />
+                    <Route path="/foodlogapprovals" element={<Approvalpage />} />
                     <Route path="/foodinventorylog" element={<FoodInventoryLog />} />
                     <Route path="/finishedgoods" element={<FinishedGoods />} />
                     <Route path="/packaged" element={<PackagingList />} />
                     <Route path="/packaged/:id" element={<PackagedDetails />} />
+                    <Route path="/packagedlogs" element={<PackagedLogs />} />
+                    <Route path="/packagelogapprovals" element={<PackageLogApproval />} />
                     <Route path="/createpackaging" element={<PackagingForm />} />
                     <Route path="/users" element={<Users />} />
                 </Routes>
